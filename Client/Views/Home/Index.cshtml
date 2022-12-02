@@ -1,0 +1,48 @@
+﻿@model  IEnumerable<Client.EmployeeServiceReference.EmployeeDto>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+
+@using (Html.BeginForm("Add", "Employee", new { @class = "form" }))
+{
+    <div>
+        <div>
+            <h2>Employees</h2>
+        </div>
+        <div>
+            @Html.ActionLink("Add Employee", "Add", "Employee")
+            <hr />
+        </div>
+    </div>
+    <div>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Birth Date</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            @{int i = 0;
+                foreach (var employee in Model)
+                {
+                    <tbody>
+                        <tr>
+                            <th scope="row"><span>@(++i)</span></th>
+                            <td>@employee.FirstName</td>
+                            <td>@employee.LastName</td>
+                            <td>@employee.Title</td>
+                            <td>@employee.BirthDate</td>
+                            <td>@Html.ActionLink("Edit", "Edit", "Employee", new { id = employee.EmployeeId }, null) /@Html.ActionLink("Delete", "Delete", "Employee", new { id = employee.EmployeeId }, null)</td>
+                        </tr>
+                    </tbody>
+                }
+            }
+        </table>
+    </div>
+}
+
